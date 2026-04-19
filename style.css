@@ -1083,6 +1083,23 @@ nav {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.experience__logo-wrap--brand {
+  border-color: rgba(16, 24, 40, 0.08);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 139, 87, 0.16),
+      transparent 42%
+    ),
+    linear-gradient(180deg, #192233, #101826);
+  box-shadow: 0 20px 40px rgba(16, 24, 40, 0.16);
+}
+
+.experience__logo-wrap--brand .experience__logo {
+  max-width: 58px;
+  max-height: 58px;
+}
+
 .experience__logo {
   display: block;
   width: auto;
