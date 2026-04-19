@@ -1,459 +1,1109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kobe Guo | Software Engineer</title>
+    <meta
+      name="description"
+      content="Kobe Guo is a software engineer and UIUC MCS-DS student focused on machine learning, data engineering, and building reliable data-driven systems."
+    />
+    <meta name="theme-color" content="#f6f1e8" />
+    <meta property="og:title" content="Kobe Guo | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Kobe Guo featuring machine learning, data engineering, automation, and software engineering projects."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kobeguo.com/" />
+    <meta property="og:image" content="https://kobeguo.com/assets/logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Kobe Guo | Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Kobe Guo featuring machine learning, data engineering, automation, and software engineering projects."
+    />
+    <link rel="canonical" href="https://kobeguo.com/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./assets/logo.png" type="image/png" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script defer src="index.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kobe Guo</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-  <script src="index.js"></script>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  <script type="text/javascript">
-    (function () {
-      emailjs.init("user_K1PoFs8pB2YVWStDxrUls");
-    })();
-  </script>
-</head>
+  <body>
+    <main>
+      <section id="landing-page">
+        <nav aria-label="Primary">
+          <a href="#landing-page" class="brand-mark" aria-label="Back to top">
+            <img
+              id="personal-logo"
+              src="./assets/logo.png"
+              alt="Kobe Guo logo"
+              width="168"
+              height="145"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <span class="brand-mark__text">
+              <span class="brand-mark__name">Kobe Guo</span>
+              <span class="brand-mark__role">Software Engineer</span>
+            </span>
+          </a>
+          <ul class="nav__link--list">
+            <li class="nav__link">
+              <button
+                type="button"
+                class="nav__link--anchor nav__link--button link__hover-effect link__hover-effect--black"
+                onclick="toggleModal('about')"
+              >
+                About
+              </button>
+            </li>
+            <li class="nav__link">
+              <a
+                href="#experience"
+                class="nav__link--anchor link__hover-effect link__hover-effect--black"
+              >
+                Experience
+              </a>
+            </li>
+            <li class="nav__link">
+              <a
+                href="#projects"
+                class="nav__link--anchor link__hover-effect link__hover-effect--black"
+              >
+                Projects
+              </a>
+            </li>
+            <li class="nav__link">
+              <button
+                type="button"
+                class="nav__link--anchor nav__link--button link__hover-effect link__hover-effect--black"
+                onclick="toggleModal('contact')"
+              >
+                Contact
+              </button>
+            </li>
+            <li class="nav__link">
+              <button
+                id="theme-toggle"
+                type="button"
+                class="nav__link--anchor nav__link--button click link__hover-effect link__hover-effect--black"
+                onclick="toggleContrast()"
+                aria-label="Toggle dark mode"
+                aria-pressed="false"
+              >
+                <i class="bx bx-adjust" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
 
-<body>
-  <section id="landing-page" onmousemove="moveBackground(event)">
-    <nav>
-      <figure>
-        <img id="personal-logo" src="./assets/logo.png" alt="">
-      </figure>
-      <ul class="nav__link--list">
-        <li class="nav__link" onclick="toggleModal()">
-          <a href="#" class="
-            nav__link--anchor
-            link__hover-effect
-            link__hover-effect--black
-          ">About</a>
-        </li>
-        <li class="nav__link">
-          <a href="#projects" class="
-            nav__link--anchor
-            link__hover-effect
-            link__hover-effect--black
-          ">Projects</a>
-        </li>
-        <li class="nav__link" onclick="toggleModal()">
-          <a href="#" class="
-            nav__link--anchor
-            link__hover-effect
-            link__hover-effect--black
-          ">Contact</a>
-        </li>
-        <li class="nav__link click" onclick="toggleContrast()">
-          <a href="#" class="
-            nav__link--anchor
-            link__hover-effect
-            link__hover-effect--black
-          "><i class='bx bx-adjust'></i>
+        <header class="header">
+          <div class="header__content">
+            <div class="header__copy">
+              <p class="header__eyebrow">
+                Software Engineer | MCS-DS @ UIUC | ML + Data Engineering
+              </p>
+              <h1 class="title">
+                Hey, I&apos;m <span class="orange">Kobe Guo.</span>
+              </h1>
+              <p class="header__para">
+                I&apos;m a software engineer and
+                <b class="vandy-gold"
+                  >University of Illinois Urbana-Champaign</b
+                >
+                MCS-DS student focused on machine learning, data engineering,
+                and production-ready software. I like building clean systems,
+                reliable workflows, and tools that solve real problems.
+                <br />
+                Here&apos;s a bit more
+                <button
+                  type="button"
+                  class="text-button orange click"
+                  onclick="toggleModal('about')"
+                >
+                  about me
+                </button>
+                and how I work.
+              </p>
+              <div class="header__actions">
+                <a href="#experience" class="button button--primary"
+                  >View experience</a
+                >
+                <a href="#projects" class="button button--secondary"
+                  >View selected work</a
+                >
+              </div>
+              <ul class="header__pill-list" aria-label="Core strengths">
+                <li class="header__pill">Machine learning</li>
+                <li class="header__pill">Data engineering</li>
+                <li class="header__pill">Python + SQL</li>
+                <li class="header__pill">React.js</li>
+              </ul>
+              <div class="social__list" aria-label="Social links">
+                <a
+                  href="https://www.linkedin.com/in/kobeguo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social__link click"
+                  aria-label="View Kobe Guo on LinkedIn"
+                >
+                  <i class="bx bxl-linkedin" aria-hidden="true"></i>
+                </a>
+                <a
+                  href="https://github.com/KobeGuo99"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social__link click"
+                  aria-label="View Kobe Guo on GitHub"
+                >
+                  <i class="bx bxl-github" aria-hidden="true"></i>
+                </a>
+                <a
+                  href="./assets/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social__link click"
+                  aria-label="Open Kobe Guo resume PDF"
+                >
+                  <i class="bx bxs-file-pdf" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <aside class="hero__spotlight" aria-label="Professional overview">
+              <div class="hero__card hero__card--code">
+                <div class="hero__card-top">
+                  <span class="hero__card-chip">Quick overview</span>
+                  <span class="hero__card-status">
+                    <span class="hero__card-status-dot"></span>
+                    Open to opportunities
+                  </span>
+                </div>
+                <div class="hero__summary">
+                  <div
+                    class="hero__summary-snippet"
+                    aria-label="Quick code overview"
+                  >
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >01</span
+                      >
+                      <span class="hero__summary-line-text"
+                        ><span class="hero__summary-key">kobe</span> =
+                        &#123;</span
+                      >
+                    </span>
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >02</span
+                      >
+                      <span class="hero__summary-line-text"
+                        >&nbsp;&nbsp;<span class="hero__summary-key">role</span
+                        >:
+                        <span class="hero__summary-value"
+                          >&quot;software engineer&quot;</span
+                        >,</span
+                      >
+                    </span>
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >03</span
+                      >
+                      <span class="hero__summary-line-text"
+                        >&nbsp;&nbsp;<span class="hero__summary-key">focus</span
+                        >: [
+                        <span class="hero__summary-value">&quot;ml&quot;</span>,
+                        <span class="hero__summary-value">&quot;data&quot;</span
+                        >,
+                        <span class="hero__summary-value"
+                          >&quot;backend&quot;</span
+                        >],</span
+                      >
+                    </span>
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >04</span
+                      >
+                      <span class="hero__summary-line-text"
+                        >&nbsp;&nbsp;<span class="hero__summary-key"
+                          >current</span
+                        >:
+                        <span class="hero__summary-value"
+                          >&quot;UIUC MCS-DS&quot;</span
+                        >,</span
+                      >
+                    </span>
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >05</span
+                      >
+                      <span class="hero__summary-line-text"
+                        >&nbsp;&nbsp;<span class="hero__summary-key">next</span
+                        >:
+                        <span class="hero__summary-value"
+                          >&quot;Capital One intern, Summer 2026&quot;</span
+                        ></span
+                      >
+                    </span>
+                    <span class="hero__summary-line">
+                      <span class="hero__summary-line-number" aria-hidden="true"
+                        >06</span
+                      >
+                      <span class="hero__summary-line-text">&#125;</span>
+                    </span>
+                  </div>
+                  <p class="hero__summary-copy">
+                    Building a strong foundation in software engineering while
+                    growing deeper in machine learning and data systems.
+                  </p>
+                  <div
+                    class="hero__summary-grid"
+                    aria-label="Professional summary"
+                  >
+                    <div class="hero__summary-item">
+                      <p class="hero__summary-label">Now</p>
+                      <p class="hero__summary-text">
+                        UIUC MCS-DS student with product and internship
+                        experience.
+                      </p>
+                    </div>
+                    <div class="hero__summary-item">
+                      <p class="hero__summary-label">Next</p>
+                      <p class="hero__summary-text">
+                        Incoming Software Engineer Intern at Capital One in
+                        Summer 2026.
+                      </p>
+                    </div>
+                    <div class="hero__summary-item">
+                      <p class="hero__summary-label">Style</p>
+                      <p class="hero__summary-text">
+                        Analytical, dependable, and comfortable turning ideas
+                        into polished software.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="hero__summary-pills"
+                    aria-label="Technical toolkit"
+                  >
+                    <span class="hero__summary-pill">Python</span>
+                    <span class="hero__summary-pill">SQL</span>
+                    <span class="hero__summary-pill">TensorFlow</span>
+                    <span class="hero__summary-pill">React.js</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </header>
+
+        <button
+          type="button"
+          class="mail__btn click"
+          onclick="toggleModal('contact')"
+          aria-label="Open contact form"
+        >
+          <i class="bx bx-envelope" aria-hidden="true"></i>
+        </button>
+
+        <a href="#experience" class="scroll" aria-label="Scroll to experience">
+          <div class="scroll__icon click" aria-hidden="true"></div>
         </a>
-        </li>
-      </ul>
-    </nav>
-    <header class="header">
-      <div class="header__content">
-        <h1 class="title">Hey</h1>
-        <h1 class="title orange">I'm Kobe Guo.</h1>
-        <p class="header__para">
-          I'm a <b class="orange">Computer Science graduate</b> from <b class="vandy-gold">Vanderbilt University</b> 
-          aiming to use the knowledge I have learned from coursework and self-study to help your company achieve its goals.
-          <br>
-          Here's a bit more <b class="orange click" onclick="toggleModal()">about me</b>.
-        </p>
-        <div class="social__list">
-          <a href="https://www.linkedin.com/in/kobeguo/" target="_blank" class="social__link click">
-            <i class='bx bxl-linkedin'></i>
-          </a>
-          <a href="https://github.com/KobeGuo99" target="_blank" class="social__link click">
-            <i class='bx bxl-github'></i>
-          </a>
-          <a href="./assets/resume.pdf" target="_blank" class="social__link click">
-            <i class='bx bxs-file-pdf'></i>
-          </a>
-        </div>
-      </div>
-    </header>
-    <a href="#">
-      <button class="mail__btn click" onclick="toggleModal()">
-        <i class='bx bx-envelope'></i>
-      </button>
-    </a>
-    <a href="#projects" class="scroll">
-      <div class="scroll__icon click"></div>
-    </a>
-    <div class="modal">
-      <div class="modal__half modal__about">
-        <h3 class="modal__title modal__title--about">Here's a bit about me.</h3>
-        <h4 class="modal__sub-title modal__sub-title--about">Undergraduate Student at Vanderbilt University.</h4>
-        <p class="modal__para">
-          I'm a 22 year-old <b class="orange">Computer Science graduate</b> from <b class="vandy-gold">Vanderbilt University</b>.
-          <br>
-          I program with <b class="orange">Python</b>, <b class="orange">JavaScript</b>, and <b class="orange">C++</b>, and I make frontends with <b class="orange">React</b>, <b class="orange">HTML</b>, <b class="orange">CSS</b>, and <b class="orange">JavaScript</b>.
-        </p>
-        <div class="modal__languages">
-          <figure class="modal__language">
-            <img class="modal__language--img"
-              src="https://raw.githubusercontent.com/docker-library/docs/01c12653951b2fe592c1f93a13b4e289ada0e3a1/python/logo.png" alt="">
-            <span class="language__name">Python</span>
-          </figure>
-          <figure class="modal__language">
-            <img class="modal__language--img" src="https://cdn-media-1.freecodecamp.org/images/1*jnqXL4Q-iW0qxodFDTxyFQ.jpeg"
-              alt="">
-            <span class="language__name">React</span>
-          </figure>
-          <figure class="modal__language">
-            <img class="modal__language--img" src="https://cdn.iconscout.com/icon/free/png-256/javascript-1-225993.png"
-              alt="">
-            <span class="language__name">JavaScript</span>
-          </figure>
-          <figure class="modal__language">
-            <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png" alt="">
-            <span class="language__name">C++</span>
-          </figure>
-          <figure class="modal__language">
-            <img class="modal__language--img"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/240px-HTML5_Badge.svg.png"
-              alt="">
-            <span class="language__name">HTML</span>
-          </figure>
-          <figure class="modal__language">
-            <img class="modal__language--img" src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png"
-              alt="">
-            <span class="language__name">CSS</span>
-          </figure>
-          
 
-        </div>
-      </div>
-      <div class="modal__half modal__contact">
-        <i class="bx bx-x modal__exit click" onclick="toggleModal()"></i>
-        <h3 class="modal__title modal__title--contact">
-          Let's have a chat!
-        </h3>
-        <h3 class="modal__sub-title modal__sub-title--contact">
-          I'm currently open to new opportunities.
-        </h3>
-        <form id="contact__form" onsubmit="contact(event)">
-          <div class="form__item">
-            <label class="form__item--label">Name</label>
-            <input class="input" name="user_name" type="text" required></input>
-          </div>
-          <div class="form__item">
-            <label class="form__item--label">Email</label>
-            <input class="input" name="user_email" type="email" required></input>
-          </div>
-          <div class="form__item">
-            <label class="form__item--label">Message</label>
-            <textarea class="input" name="message" type="text" required></textarea>
-          </div>
-          <button id="contact__submit" class="form__submit">
-            Send it my way
-          </button>
-        </form>
-        <div class="modal__overlay modal__overlay--loading">
-          <i class='bx bx-loader-circle'></i>
-        </div>
-        <div class="modal__overlay modal__overlay--success">
-          Thanks for the message! Looking forward to speaking to you soon.
-        </div>
-      </div>
-    </div>
-    <img src="./assets/semi circle.svg" class="shape shape--0">
-    <img src="./assets/circle.svg" class="shape shape--1">
-    <img src="./assets/squiggly.svg" class="shape shape--2">
-    <img src="./assets/circle.svg" class="shape shape--3">
-    <img src="./assets/triangle.svg" class="shape shape--4">
-    <img src="./assets/circle.svg" class="shape shape--5">
-    <img src="./assets/squiggly.svg" class="shape shape--6">
-    <img src="./assets/circle.svg" class="shape shape--7">
-    <img src="./assets/semi circle.svg" class="shape shape--8">
-  </section>
-  <section id="projects">
-    <div class="container">
-      <div class="row">
-        <h1 class="section__title">
-          Here are some of my <span class="orange">projects</span>
-        </h1>
-        <ul class="project__list">
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/uls23pic.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  Universal Lesion Segmentation Challenge 2023
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Python, TensorFlow, Keras
-                </h4>
-                <p class="project__description--para">
-                  As part of my senior project, I collaborated with a multidisciplinary team to develop and evaluate machine learning models for medical image segmentation. Focusing on bone datasets sourced from hospital data, we implemented and fine-tuned advanced models, achieving a Dice score of 0.87. Our work contributed to the broader understanding of effective algorithms in medical imaging, with documented results that highlight the project’s technical accomplishments.
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KWFredShi/ULS2023NGKD"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                  href="https://drive.google.com/file/d/1BvOKUAubBquhk-vgts6W2vDbpyU9CCaT/view?usp=sharing"
-                  target="_blank"
-                  class="project__description--link"
-                >
-                <i class='bx bx-link'></i>
-              </a>
-                </div>
-              </div>
-            </div>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/twitter-clone.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  Twitter Clone
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Next.js (React), JavaScript, Firebase, Redux, Tailwind CSS
-                </h4>
-                <p class="project__description--para">
-                  Built a Twitter-like real-time social media app using Next.js and React for front-end, and Firebase for back-end services like user authentication and real-time data updates. Leveraged Redux for predictable state management and Tailwind CSS for responsive UI, ensuring a robust, secure, and user-friendly application.
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/Twitter-Clone"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                  href="https://twitter-clone-8w1z.vercel.app/"
-                  target="_blank"
-                  class="project__description--link"
-                >
-                <i class='bx bx-link'></i>
-              </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/Feralands.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  Feralands 2D Action RPG
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Gamemaker Studio, GML
-                </h4>
-                <p class="project__description--para">
-                  Feralands is a 2D action RPG developed using GameMaker Language (GML), a language combining elements of C++, C#, and JavaScript. This project involved designing comprehensive game mechanics, including character movement, a nuanced combat system, an interactive inventory system, and an efficient game state management system. 
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/Feralands"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                  href="https://gx.games/games/3i7r05/feralands-2d-rpg/tracks/7aa32faa-b0e0-4705-a0a2-c40b3570eff1/"
-                  target="_blank"
-                  class="project__description--link"
-                >
-                <i class='bx bx-link'></i>
-              </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/tiktok.jpg" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  TikTok Video Scraper
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Python, BeautifulSoup, Selenium
-                </h4>
-                <p class="project__description--para">
-                  Developed a comprehensive TikTok video scraper using Selenium and BeautifulSoup to download all of a user's videos without watermarks. Utilized advanced web scraping techniques, including parsing HTML elements and attributes, to extract and access video links for downloading.
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/TikTok-Video-Scraper"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                  href="https://youtu.be/xckrKUyUvYI"
-                  target="_blank"
-                  class="project__description--link"
-                >
-                <i class='bx bx-link'></i>
-              </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/touchdownwings.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  Touchdown Wings Website
-                </h3>
-                <h4 class="project__description--sub-title">
-                  React.js, JavaScript, Bootstrap
-                </h4>
-                <p class="project__description--para">
-                  The Touchdown Wings Website is a user-centric platform built with React.js, JavaScript, and Bootstrap, showcasing a local restaurant's menu. It attracts over 1,000 monthly visitors.
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/TouchdownWings"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                  href="https://touchdownwingstullahoma.com/"
-                  target="_blank"
-                  class="project__description--link"
-                >
-                <i class='bx bx-link'></i>
-              </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/soup.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  Web Scraper
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Python - BeautifulSoup Library
-                </h4>
-                <p class="project__description--para">
-                  A program that uses Python to access data from timesjobs.com to display job listings and job details in an orderly and organized manner. It was developed using the BeautifulSoup library in Python to analyze the HTML elements of the website.
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/Web-Scraper"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="project">
-            <div class="project__wrapper">
-              <img src="./assets/eportfolioss.png" class="project__img" alt="">
-              <div class="project__wrapper--bg"></div>
-              <div class="project__description">
-                <h3 class="project__description--title">
-                  E-Portfolio
-                </h3>
-                <h4 class="project__description--sub-title">
-                  Html, CSS, JavaScript
-                </h4>
-                <p class="project__description--para">
-                  Designed, developed, and hosted my own e-portfolio using HTML5, CSS3 and JavaScript.
-                  Implemented responsive and multi-platform support to ensure optimal viewing on any device
-                </p>
-                <div class="project__description--links">
-                  <a
-                    href="https://github.com/KobeGuo99/ePortfolio"
-                    target="_blank"
-                    class="project__description--link"
-                  >
-                  <i class='bx bxl-github'></i>
-                </a>
-                  <a
-                      href="https://kobeguo.com"
-                      target="_blank"
-                      class="project__description--link"
-                    >
-                    <i class='bx bx-link'></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <div class="container">
-      <div class="row footer__row">
-        <a href="#" class="footer__anchor">
-          <figure class="footer__logo">
-            <img src="./assets/logo.png" class="footer__logo--img" alt="">
-          </figure>
-          <span class="footer__logo--popper">
-            Top
-            <i class="fas fa-arrow-up"></i>
-          </span>
-        </a>
-        <div class="footer__social--list">
-          <a href="https://github.com/KobeGuo99" target="_blank" class="
-          footer__social--link
-          link__hover-effect
-          link__hover-effect--white
-        ">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/kobeguo/" target="_blank" class="
-          footer__social--link
-          link__hover-effect
-          link__hover-effect--white
-        ">
-            LinkedIn
-          </a>
-          <a href="#" onclick="toggleModal()" class="
-          footer__social--link
-          link__hover-effect
-          link__hover-effect--white
-        ">
-            Contact
-          </a>
-          <a href="./assets/resume.pdf" target="_blank" class="
-          footer__social--link
-          link__hover-effect
-          link__hover-effect--white
-        ">
-            Resume
-          </a>
-        </div>
-        <div class="footer__copyright">Copyright &copy; 2022 Kobe Guo</div>
-      </div>
-    </div>
-  </footer>
-</body>
+        <div
+          class="modal__backdrop"
+          onclick="toggleModal()"
+          aria-hidden="true"
+        ></div>
 
+        <div
+          class="modal"
+          id="site-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+          tabindex="-1"
+        >
+          <div class="modal__half modal__about">
+            <h2 class="modal__title modal__title--about" id="modal-title">
+              Here&apos;s a bit about me.
+            </h2>
+            <h3 class="modal__sub-title modal__sub-title--about">
+              Graduate student at the University of Illinois Urbana-Champaign.
+            </h3>
+            <p class="modal__para" id="modal-description">
+              I&apos;m a software engineer pursuing a Master of Computer Science
+              in Data Science with a growing focus on machine learning, data
+              engineering, and data-intensive software systems. My strongest
+              tools are <b class="orange">Python</b>, <b class="orange">SQL</b>,
+              <b class="orange">TensorFlow</b>,
+              <b class="orange">JavaScript</b>, <b class="orange">React.js</b>,
+              and <b class="orange">MySQL</b>.
+            </p>
+            <div class="modal__languages" aria-label="Technical skills">
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-python.svg"
+                  alt="Python logo"
+                  loading="lazy"
+                />
+                <span class="language__name">Python</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-tensorflow.svg"
+                  alt="TensorFlow logo"
+                  loading="lazy"
+                />
+                <span class="language__name">TensorFlow</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-sql.svg"
+                  alt="SQL database icon"
+                  loading="lazy"
+                />
+                <span class="language__name">SQL</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-react.svg"
+                  alt="React logo"
+                  loading="lazy"
+                />
+                <span class="language__name">React.js</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-javascript.svg"
+                  alt="JavaScript logo"
+                  loading="lazy"
+                />
+                <span class="language__name">JavaScript</span>
+              </figure>
+              <figure class="modal__language">
+                <img
+                  class="modal__language--img"
+                  src="./assets/skill-mysql.svg"
+                  alt="MySQL logo"
+                  loading="lazy"
+                />
+                <span class="language__name">MySQL</span>
+              </figure>
+            </div>
+          </div>
+
+          <div class="modal__half modal__contact">
+            <button
+              type="button"
+              class="modal__exit click"
+              onclick="toggleModal()"
+              aria-label="Close dialog"
+            >
+              <i class="bx bx-x" aria-hidden="true"></i>
+            </button>
+            <h2 class="modal__title modal__title--contact">
+              Let&apos;s have a chat.
+            </h2>
+            <p class="modal__sub-title modal__sub-title--contact">
+              I&apos;m currently open to software engineering, machine learning,
+              and data-focused opportunities.
+            </p>
+            <p class="contact__direct">
+              Prefer email?
+              <a class="contact__direct-link" href="mailto:kobe.h.guo@gmail.com"
+                >kobe.h.guo@gmail.com</a
+              >
+            </p>
+            <form id="contact__form" onsubmit="contact(event)">
+              <div class="form__item">
+                <label class="form__item--label" for="contact-name">Name</label>
+                <input
+                  class="input"
+                  id="contact-name"
+                  name="user_name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="form__item">
+                <label class="form__item--label" for="contact-email"
+                  >Email</label
+                >
+                <input
+                  class="input"
+                  id="contact-email"
+                  name="user_email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="form__item">
+                <label class="form__item--label" for="contact-message"
+                  >Message</label
+                >
+                <textarea
+                  class="input"
+                  id="contact-message"
+                  name="message"
+                  required
+                ></textarea>
+              </div>
+              <button id="contact__submit" class="form__submit" type="submit">
+                Send it my way
+              </button>
+              <p
+                class="contact__status"
+                id="contact__status"
+                aria-live="polite"
+              ></p>
+            </form>
+            <div
+              class="modal__overlay modal__overlay--loading"
+              aria-hidden="true"
+            >
+              <i class="bx bx-loader-circle" aria-hidden="true"></i>
+            </div>
+            <div
+              class="modal__overlay modal__overlay--success"
+              aria-hidden="true"
+            >
+              Thanks for the message! Looking forward to speaking with you soon.
+            </div>
+          </div>
+        </div>
+
+        <img
+          src="./assets/semi circle.svg"
+          class="shape shape--0"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/circle.svg"
+          class="shape shape--1"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/squiggly.svg"
+          class="shape shape--2"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/circle.svg"
+          class="shape shape--3"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/triangle.svg"
+          class="shape shape--4"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/circle.svg"
+          class="shape shape--5"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/squiggly.svg"
+          class="shape shape--6"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/circle.svg"
+          class="shape shape--7"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          src="./assets/semi circle.svg"
+          class="shape shape--8"
+          alt=""
+          aria-hidden="true"
+        />
+      </section>
+
+      <section id="experience" aria-labelledby="experience-title">
+        <div class="container">
+          <div class="row">
+            <div class="section__copy">
+              <p class="section__eyebrow">Experience</p>
+              <h2 class="section__title" id="experience-title">
+                Experience that backs up the portfolio.
+              </h2>
+              <p class="section__lead">
+                A mix of incoming internship work, production engineering, and
+                client-facing development that shows both technical depth and
+                real-world execution.
+              </p>
+            </div>
+
+            <div class="experience__grid">
+              <article class="experience__card experience__card--featured">
+                <div class="experience__brand">
+                  <div class="experience__logo-wrap">
+                    <img
+                      src="./assets/Capital-One-Logo.png"
+                      alt="Capital One logo"
+                      class="experience__logo"
+                    />
+                  </div>
+                </div>
+                <div class="experience__card-top">
+                  <span class="experience__eyebrow">Upcoming</span>
+                  <span class="experience__badge">Summer 2026</span>
+                </div>
+                <h3 class="experience__title">Capital One</h3>
+                <p class="experience__role">Software Engineer Intern</p>
+                <div class="experience__meta">
+                  <span>June 2026 - August 2026</span>
+                  <span class="experience__separator" aria-hidden="true"></span>
+                  <span>McLean, VA</span>
+                </div>
+                <p class="experience__description">
+                  Incoming Software Engineer Intern for Summer 2026, where
+                  I&apos;ll be learning how large-scale production systems are
+                  built, tested, and operated in a real engineering environment.
+                </p>
+              </article>
+
+              <article class="experience__card">
+                <div class="experience__brand">
+                  <div class="experience__logo-wrap">
+                    <img
+                      src="./assets/logo.png"
+                      alt="Kobe Guo logo"
+                      class="experience__logo"
+                    />
+                  </div>
+                </div>
+                <div class="experience__card-top">
+                  <span class="experience__eyebrow">Freelance</span>
+                </div>
+                <h3 class="experience__title">Self-Employed</h3>
+                <p class="experience__role">Freelance Developer</p>
+                <div class="experience__meta">
+                  <span>November 2023 - August 2025</span>
+                  <span class="experience__separator" aria-hidden="true"></span>
+                  <span>Remote</span>
+                </div>
+                <p class="experience__description">
+                  Built and shipped client work for small businesses, with
+                  hands-on ownership across frontend improvements, performance
+                  tuning, accessibility fixes, and production-ready updates.
+                </p>
+              </article>
+
+              <article class="experience__card">
+                <div class="experience__brand">
+                  <div class="experience__logo-wrap">
+                    <img
+                      src="./assets/nourishd_logo.png"
+                      alt="Nourish'd logo"
+                      class="experience__logo"
+                    />
+                  </div>
+                </div>
+                <div class="experience__card-top">
+                  <span class="experience__eyebrow">Internship</span>
+                </div>
+                <h3 class="experience__title">Nourish&apos;d</h3>
+                <p class="experience__role">Software Engineer Intern</p>
+                <div class="experience__meta">
+                  <span>June 2023 - August 2023</span>
+                  <span class="experience__separator" aria-hidden="true"></span>
+                  <span>Cape Town, South Africa</span>
+                </div>
+                <p class="experience__description">
+                  Built product features across mobile and backend systems,
+                  including a React Native ordering app and a MySQL-to-Firebase
+                  migration that supported more scalable, real-time product
+                  behavior.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-title">
+        <div class="container">
+          <div class="row">
+            <div class="section__copy">
+              <p class="section__eyebrow">Selected Work</p>
+              <h2 class="section__title" id="projects-title">
+                Projects that show how I think, build, and ship.
+              </h2>
+              <p class="section__lead">
+                A mix of machine learning, automation, data-oriented software,
+                and selected production projects with a bias for clean execution
+                and measurable outcomes.
+              </p>
+            </div>
+            <ul class="project__list">
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/uls23pic.jpg"
+                    class="project__img"
+                    alt="Preview of the Universal Lesion Segmentation Challenge 2023 project"
+                    width="1600"
+                    height="1181"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">01</span>
+                      <span class="project__impact"
+                        >Machine learning project</span
+                      >
+                    </div>
+                    <h3 class="project__description--title">
+                      Universal Lesion Segmentation Challenge 2023
+                    </h3>
+                    <p class="project__description--sub-title">
+                      Python, TensorFlow, Keras
+                    </p>
+                    <p class="project__description--para">
+                      As part of my senior project, I collaborated with a
+                      multidisciplinary team to develop and evaluate machine
+                      learning models for medical image segmentation. Working
+                      with hospital bone datasets, we fine-tuned advanced models
+                      and achieved a Dice score of 0.87.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KWFredShi/ULS2023NGKD"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Universal Lesion Segmentation Challenge 2023 source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://drive.google.com/file/d/1BvOKUAubBquhk-vgts6W2vDbpyU9CCaT/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Universal Lesion Segmentation Challenge 2023 project presentation"
+                      >
+                        Presentation
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/twitter-clone.png"
+                    class="project__img"
+                    alt="Preview of the Twitter Clone project"
+                    width="1294"
+                    height="745"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">02</span>
+                      <span class="project__impact"
+                        >Full-stack application</span
+                      >
+                    </div>
+                    <h3 class="project__description--title">Twitter Clone</h3>
+                    <p class="project__description--sub-title">
+                      Next.js, React, JavaScript, Firebase, Redux, Tailwind CSS
+                    </p>
+                    <p class="project__description--para">
+                      Built a real-time social media app with Next.js and React,
+                      backed by Firebase for authentication and live updates.
+                      Redux and Tailwind CSS helped keep the interface
+                      responsive, consistent, and easy to extend.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/Twitter-Clone"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Twitter Clone source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://twitter-clone-8w1z.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="Open the live Twitter Clone demo"
+                      >
+                        Live demo
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/Feralands.jpg"
+                    class="project__img"
+                    alt="Preview of the Feralands 2D Action RPG project"
+                    width="2110"
+                    height="1184"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">03</span>
+                      <span class="project__impact"
+                        >Custom gameplay systems</span
+                      >
+                    </div>
+                    <h3 class="project__description--title">
+                      Feralands 2D Action RPG
+                    </h3>
+                    <p class="project__description--sub-title">
+                      GameMaker Studio, GML
+                    </p>
+                    <p class="project__description--para">
+                      Designed and built a 2D action RPG with custom movement,
+                      combat, inventory, and game-state systems. The project
+                      focused on combining gameplay feel with maintainable game
+                      logic and iterative polish.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/Feralands"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Feralands source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://gx.games/games/3i7r05/feralands-2d-rpg/tracks/7aa32faa-b0e0-4705-a0a2-c40b3570eff1/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="Play the Feralands project demo"
+                      >
+                        Play demo
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/tiktok.jpg"
+                    class="project__img"
+                    alt="Preview of the TikTok Video Scraper project"
+                    width="970"
+                    height="545"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">04</span>
+                      <span class="project__impact">Automation + scraping</span>
+                    </div>
+                    <h3 class="project__description--title">
+                      TikTok Video Scraper
+                    </h3>
+                    <p class="project__description--sub-title">
+                      Python, BeautifulSoup, Selenium
+                    </p>
+                    <p class="project__description--para">
+                      Developed a scraper that navigates TikTok pages, parses
+                      relevant HTML, and collects video links for download
+                      workflows. The project sharpened my skills in browser
+                      automation and resilient scraping.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/TikTok-Video-Scraper"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View TikTok Video Scraper source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://youtu.be/xckrKUyUvYI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="Watch the TikTok Video Scraper demo"
+                      >
+                        Watch demo
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/touchdownwings.jpg"
+                    class="project__img"
+                    alt="Preview of the Touchdown Wings website"
+                    width="1330"
+                    height="954"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">05</span>
+                      <span class="project__impact"
+                        >Client-facing delivery</span
+                      >
+                    </div>
+                    <h3 class="project__description--title">
+                      Touchdown Wings Website
+                    </h3>
+                    <p class="project__description--sub-title">
+                      React, JavaScript, Bootstrap
+                    </p>
+                    <p class="project__description--para">
+                      Built a restaurant website focused on clarity,
+                      responsiveness, and real business impact. The site
+                      attracts more than 1,000 monthly visitors and supports a
+                      smoother browsing experience for customers.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/TouchdownWings"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Touchdown Wings website source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://touchdownwingstullahoma.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="Open the live Touchdown Wings website"
+                      >
+                        Live site
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/soup.png"
+                    class="project__img"
+                    alt="Preview of the Web Scraper project"
+                    width="1553"
+                    height="778"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">06</span>
+                      <span class="project__impact">Practical automation</span>
+                    </div>
+                    <h3 class="project__description--title">Web Scraper</h3>
+                    <p class="project__description--sub-title">
+                      Python, BeautifulSoup
+                    </p>
+                    <p class="project__description--para">
+                      Built a Python scraper that pulls job data from TimesJobs
+                      and formats listings into a cleaner, easier-to-read
+                      output. It focused on HTML parsing fundamentals and
+                      practical automation.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/Web-Scraper"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View Web Scraper source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="project">
+                <div class="project__wrapper" tabindex="0">
+                  <img
+                    src="./assets/eportfolioss.jpg"
+                    class="project__img"
+                    alt="Preview of this ePortfolio site"
+                    width="1600"
+                    height="888"
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  <div class="project__wrapper--bg"></div>
+                  <div class="project__description">
+                    <div class="project__meta">
+                      <span class="project__number">07</span>
+                      <span class="project__impact"
+                        >Personal systems design</span
+                      >
+                    </div>
+                    <h3 class="project__description--title">E-Portfolio</h3>
+                    <p class="project__description--sub-title">
+                      HTML, CSS, JavaScript
+                    </p>
+                    <p class="project__description--para">
+                      Designed, developed, and hosted my own portfolio to
+                      present projects, experience, and contact information in a
+                      clear, responsive format across desktop and mobile
+                      devices.
+                    </p>
+                    <div class="project__description--links">
+                      <a
+                        href="https://github.com/KobeGuo99/ePortfolio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="View ePortfolio source code on GitHub"
+                      >
+                        Code
+                        <i class="bx bxl-github" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href="https://kobeguo.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project__description--link"
+                        aria-label="Open the live ePortfolio website"
+                      >
+                        Live site
+                        <i class="bx bx-link-external" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="row footer__row">
+          <a
+            href="#landing-page"
+            class="footer__anchor"
+            aria-label="Back to top"
+            onclick="scrollToTop(event)"
+          >
+            <figure class="footer__logo">
+              <img
+                src="./assets/logo.png"
+                class="footer__logo--img"
+                alt="Kobe Guo logo"
+                width="168"
+                height="145"
+              />
+            </figure>
+            <span class="footer__logo--popper">
+              Top
+              <i class="bx bx-up-arrow-alt" aria-hidden="true"></i>
+            </span>
+          </a>
+          <div class="footer__social--list">
+            <a
+              href="https://github.com/KobeGuo99"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer__social--link link__hover-effect link__hover-effect--white"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/kobeguo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer__social--link link__hover-effect link__hover-effect--white"
+            >
+              LinkedIn
+            </a>
+            <button
+              type="button"
+              class="footer__social--link footer__social--button link__hover-effect link__hover-effect--white"
+              onclick="toggleModal('contact')"
+            >
+              Contact
+            </button>
+            <a
+              href="./assets/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer__social--link link__hover-effect link__hover-effect--white"
+            >
+              Resume
+            </a>
+          </div>
+          <div class="footer__copyright">
+            Copyright &copy; <span id="current-year"></span> Kobe Guo
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
