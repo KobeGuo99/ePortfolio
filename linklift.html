@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkLift: Cache-Aside Notes | Kobe Guo</title>
+    <meta
+      name="description"
+      content="A short engineering note on why LinkLift uses cache-aside with Redis and PostgreSQL for fast URL redirects."
+    />
+    <meta name="theme-color" content="#08111f" />
+    <link rel="canonical" href="https://kobeguo.com/linklift.html" />
+    <link rel="icon" href="./assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #08111f;
+        --panel: #101827;
+        --panel-border: rgba(214, 222, 235, 0.16);
+        --ink: #f4f1ea;
+        --muted: #b6bac4;
+        --soft: #d8d5cf;
+        --accent: #ff6358;
+        --code-bg: rgba(244, 241, 234, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: min(100% - 48px, 780px);
+        margin: 0 auto;
+        padding: 48px 0 96px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 76px;
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .topbar a {
+        border-bottom: 1px solid transparent;
+        transition: color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .topbar a:hover,
+      .topbar a:focus-visible {
+        color: var(--ink);
+        border-bottom-color: var(--accent);
+      }
+
+      .eyebrow {
+        margin: 0 0 20px;
+        color: var(--accent);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      p,
+      ul {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin-bottom: 22px;
+        color: var(--ink);
+        font-size: clamp(36px, 4.2vw, 48px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 760px;
+        margin-bottom: 42px;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 22px);
+        font-weight: 500;
+        line-height: 1.6;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 64px;
+        border: 1px solid var(--panel-border);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 22px 24px;
+      }
+
+      .metric-label {
+        margin-bottom: 14px;
+        color: var(--muted);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .metric-value {
+        color: var(--ink);
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      article {
+        max-width: 760px;
+      }
+
+      section {
+        margin-bottom: 52px;
+      }
+
+      h2 {
+        margin-bottom: 18px;
+        color: var(--ink);
+        font-size: clamp(24px, 2.6vw, 28px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      p,
+      li {
+        color: var(--soft);
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      ul {
+        padding-left: 24px;
+      }
+
+      li + li {
+        margin-top: 14px;
+      }
+
+      code {
+        border-radius: 7px;
+        background: var(--code-bg);
+        padding: 2px 8px;
+        color: var(--ink);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.88em;
+        white-space: nowrap;
+      }
+
+      .note {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        border: 1px solid var(--panel-border);
+        border-radius: 999px;
+        padding: 8px 18px;
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 700;
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        border-color: var(--accent);
+        background: rgba(255, 99, 88, 0.12);
+      }
+
+      @media (max-width: 720px) {
+        body {
+          font-size: 16px;
+        }
+
+        .wrap {
+          width: min(100% - 36px, 780px);
+          padding-top: 30px;
+        }
+
+        .topbar {
+          margin-bottom: 64px;
+          font-size: 16px;
+        }
+
+        .metrics {
+          grid-template-columns: 1fr;
+          gap: 26px;
+          margin-bottom: 64px;
+          padding: 24px 22px;
+        }
+
+        .lede {
+          margin-bottom: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <nav class="topbar" aria-label="Page navigation">
+        <a href="./index.html#projects">&larr; Back to projects</a>
+        <a
+          href="https://github.com/KobeGuo99/url-shortener"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Source on GitHub</a
+        >
+      </nav>
+
+      <p class="eyebrow">Engineering Note &middot; LinkLift</p>
+      <h1>Why cache-aside is the right shape for a URL shortener</h1>
+      <p class="lede">
+        LinkLift is a URL shortener I built end-to-end with Redis, PostgreSQL,
+        and an EC2 host. This note is about why I picked cache-aside, what that
+        bought me, and what the load numbers are actually saying.
+      </p>
+
+      <div class="metrics" aria-label="Load test highlights">
+        <div>
+          <p class="metric-label">Throughput</p>
+          <p class="metric-value">5,998 req/s</p>
+        </div>
+        <div>
+          <p class="metric-label">p99 latency</p>
+          <p class="metric-value">50 ms</p>
+        </div>
+        <div>
+          <p class="metric-label">Concurrency</p>
+          <p class="metric-value">100 conns</p>
+        </div>
+      </div>
+
+      <article>
+        <section>
+          <h2>The workload, in one paragraph</h2>
+          <p>
+            A URL shortener is a read-skewed key-value lookup. The hot path is
+            <code>GET /:slug</code>, which has to resolve a 6-8 character slug
+            to a long URL and send a 302 before the visitor notices the
+            redirect. Writes are rare, small, and more forgiving. That imbalance
+            is the whole reason cache-aside fits.
+          </p>
+        </section>
+
+        <section>
+          <h2>Cache-aside, concretely</h2>
+          <p>
+            On a redirect request, the app checks Redis first. On a hit, it
+            returns the destination URL from memory and never touches Postgres.
+            On a miss, it falls back to Postgres, writes the resolved entry into
+            Redis with a TTL, and then redirects. New links are written to
+            Postgres as the source of truth; the cache can either be invalidated
+            directly or left to expire.
+          </p>
+          <p>
+            The useful part is that Postgres only sees misses. Once the cache is
+            warm, that is a small slice of total traffic. Redis handles the
+            repeated lookups at memory speed, which is what makes the 50 ms p99
+            number unsurprising instead of magical.
+          </p>
+        </section>
+
+        <section>
+          <h2>Why not just pool Postgres connections?</h2>
+          <p>
+            For low-volume traffic, that would be fine. The reason to add Redis
+            is the failure mode during a spike. With Postgres only, every
+            redirect is a query, every query needs a connection, and a traffic
+            burst walks the pool toward its ceiling. Past that point, latency is
+            mostly queueing.
+          </p>
+          <p>
+            With cache-aside, the same spike mostly lands on Redis. The database
+            absorbs misses, which are tied to the number of new or uncached
+            slugs rather than total request volume. It also gives me a clean
+            place for rate limiting that would still work if the app moved past
+            one Node process.
+          </p>
+        </section>
+
+        <section>
+          <h2>Rate limiting and analytics</h2>
+          <p>
+            Rate limiting is <strong>10 requests per minute per IP</strong>,
+            implemented in Redis with an <code>INCR</code> + <code>EXPIRE</code>
+            pattern keyed by IP. Keeping that state out of process memory means
+            the limit stays consistent if the app is scaled horizontally.
+          </p>
+          <p>
+            Click analytics capture user-agent, IP, and timestamp per redirect,
+            but they run async. The user gets redirected first; the analytics
+            write happens after. Losing a click row during a crash is acceptable.
+            Making a visitor wait for analytics to commit is not.
+          </p>
+        </section>
+
+        <section>
+          <h2>Deployment shape</h2>
+          <p>
+            The deployment is intentionally boring: one EC2 host, Docker Compose
+            for app + Postgres + Redis, pm2 supervising the Node process, and a
+            startup script that runs migrations before the app starts accepting
+            traffic. The React + Tailwind frontend is served from the same host.
+            The interesting part of this project is the read path, not the
+            infrastructure.
+          </p>
+        </section>
+
+        <section>
+          <h2>What I would do next</h2>
+          <ul>
+            <li>
+              Move click analytics to a queue or Redis stream and batch inserts
+              into Postgres. Async writes are fine now; under sustained load,
+              they would probably be the next bottleneck.
+            </li>
+            <li>
+              Add cache stampede protection, probably a small single-flight lock
+              or probabilistic early refresh, so one hot slug expiring does not
+              briefly hammer Postgres.
+            </li>
+            <li>
+              Add lightweight redirect health checks and alerts so failures are
+              visible before they show up as broken links.
+            </li>
+          </ul>
+          <p class="note">
+            Numbers above were measured against the deployed instance with 100
+            concurrent connections.
+          </p>
+          <div class="links">
+            <a
+              class="button"
+              href="https://github.com/KobeGuo99/url-shortener"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View source</a
+            >
+            <a
+              class="button"
+              href="https://3.219.205.122/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Open demo</a
+            >
+          </div>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

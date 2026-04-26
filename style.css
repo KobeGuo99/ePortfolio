@@ -168,8 +168,7 @@ label {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-textarea:focus-visible,
-.project__wrapper:focus-visible {
+textarea:focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 4px;
 }
@@ -202,7 +201,7 @@ textarea:focus-visible,
   color: var(--color-accent) !important;
 }
 
-.vandy-gold {
+.school-accent {
   color: var(--color-gold) !important;
 }
 
