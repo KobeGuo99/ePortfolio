@@ -1,17 +1,12 @@
-const EMAILJS_PUBLIC_KEY = "5cLgxum2aHbzSMnoM";
-const EMAILJS_SERVICE_ID = "service_3621938";
-const EMAILJS_TEMPLATE_ID = "template_xrp44xb";
 const CONTACT_EMAIL = "kobe.h.guo@gmail.com";
+const CONTACT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const scaleFactor = 1 / 20;
-const EMAILJS_SDK_URL =
-  "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
 
 let isModalOpen = false;
 let contrastToggle = false;
 let shapeElements = [];
 let activePointerEvent = null;
 let animationFrameId = null;
-let emailJsLoader = null;
 
 function getModalElements() {
   return {
@@ -118,7 +113,7 @@ function scrollToTop(event) {
   });
 }
 
-function setContactStatus(message, isError = false) {
+function setContactStatus(message, isError = false, link = null) {
   const { contactStatus } = getModalElements();
 
   if (!contactStatus) {
@@ -127,6 +122,14 @@ function setContactStatus(message, isError = false) {
 
   contactStatus.textContent = message;
   contactStatus.classList.toggle("is-error", isError);
+
+  if (link) {
+    const anchor = document.createElement("a");
+    anchor.className = "contact__status-link";
+    anchor.href = link.href;
+    anchor.textContent = link.label;
+    contactStatus.append(" ", anchor, ".");
+  }
 }
 
 function clearContactFeedback() {
@@ -192,28 +195,12 @@ function toggleModal(section) {
     clearContactFeedback();
   }
 
-  if (section === "contact") {
-    const loadSdk = () => {
-      loadEmailJs().catch(() => {
-        // The form can still fall back to mailto if the SDK fails to load.
-      });
-    };
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(loadSdk, {
-        timeout: 1500,
-      });
-    } else {
-      window.setTimeout(loadSdk, 0);
-    }
-  }
-
   focusModalTarget(section);
 }
 
 function buildMailtoUrl(formData) {
-  const name = formData.get("user_name") || "";
-  const email = formData.get("user_email") || "";
+  const name = formData.get("name") || "";
+  const email = formData.get("email") || "";
   const message = formData.get("message") || "";
   const subject = `Portfolio inquiry from ${name || "a visitor"}`;
   const body = [`Name: ${name}`, `Email: ${email}`, "", message].join("\n");
@@ -221,44 +208,30 @@ function buildMailtoUrl(formData) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function openMailtoFallback(formData) {
-  window.location.href = buildMailtoUrl(formData);
-}
+async function sendContactMessage(formData) {
+  const name = formData.get("name") || "a visitor";
+  const payload = {
+    ...Object.fromEntries(formData),
+    _subject: `Portfolio inquiry from ${name}`,
+    _template: "table",
+  };
 
-function loadEmailJs() {
-  if (window.emailjs && typeof window.emailjs.sendForm === "function") {
-    return Promise.resolve(window.emailjs);
-  }
-
-  if (emailJsLoader) {
-    return emailJsLoader;
-  }
-
-  emailJsLoader = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = EMAILJS_SDK_URL;
-    script.async = true;
-    script.onload = () => {
-      if (!window.emailjs || typeof window.emailjs.init !== "function") {
-        reject(new Error("EmailJS failed to initialize"));
-        return;
-      }
-
-      window.emailjs.init({
-        publicKey: EMAILJS_PUBLIC_KEY,
-      });
-      resolve(window.emailjs);
-    };
-    script.onerror = () => {
-      reject(new Error("EmailJS failed to load"));
-    };
-    document.head.appendChild(script);
-  }).catch((error) => {
-    emailJsLoader = null;
-    throw error;
+  const response = await fetch(CONTACT_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
   });
+  const result = await response.json().catch(() => ({}));
 
-  return emailJsLoader;
+  // FormSubmit reports success as the string "true" (or a boolean).
+  if (!response.ok || String(result.success) !== "true") {
+    throw new Error(
+      result.message || `Contact request failed with status ${response.status}`,
+    );
+  }
 }
 
 async function contact(event) {
@@ -280,13 +253,7 @@ async function contact(event) {
   }
 
   try {
-    await loadEmailJs();
-
-    await window.emailjs.sendForm(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      form,
-    );
+    await sendContactMessage(formData);
 
     if (loadingOverlay) {
       loadingOverlay.classList.remove("modal__overlay--visible");
@@ -299,15 +266,18 @@ async function contact(event) {
     setContactStatus("Message sent successfully.");
     form.reset();
   } catch (error) {
+    console.error("Contact form failed to send:", error);
+
     if (loadingOverlay) {
       loadingOverlay.classList.remove("modal__overlay--visible");
     }
 
+    // Leave the form filled in so the visitor doesn't lose their message.
     setContactStatus(
-      `I could not send the form automatically. Your email app should open instead, or you can email me directly at ${CONTACT_EMAIL}.`,
+      `Sorry, the form couldn't send your message. Please email me at ${CONTACT_EMAIL}, or`,
       true,
+      { href: buildMailtoUrl(formData), label: "open it in your email app" },
     );
-    openMailtoFallback(formData);
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
